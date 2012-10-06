@@ -9,6 +9,7 @@
 \usepackage[width=175mm,height=260mm,left=20mm,foot=10mm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
+\usepackage{epstopdf}
 %\doublespacing
 
 
@@ -86,61 +87,157 @@ Polje gnezda nanocevk v valjasto omejenem prostoru}
 \section{Uvod}
 
 Nanocevke so zelo uporabne kot izviri za hladno emisijo elektronov, ker ob njihovi površini že z majhno napetostjo dosežemo velike jakosti električnega polja. Ker je težko izolirati posamezno nanocevko, dostikrat uporabijo kar celo gnezdo cevk, kakor same zrastejo.\\
-Kako se zaradi sosed polje med cevko in oddaljeno ploščato anodo oslabi? Vzemi poenostavljen primer, v katerem obravnavamo samo vrh polkroglasto zaključene cevke – torej kot majhno kroglo proti ravnini. Sosedne cevke predstavimo z mrežo krogel, tako da z zrcaljenjem nastane problem krogle v valjasto omejenem prostoru (z robnim pogojem II. vrste na mejnih ploskvah.
-
-\section{Postopek}
-
-\subsection{Numerični pristop}
-Nalogo zastavimo kot reševanje parcialne diferencialne enačbe z robnimi pogoji prvega (Dirichlet) in
-drugega reda (von Neumann) ter jo lahko rešujemo numerično. Zaradi cilindrične geometrije se 
-poslužimo cilindričnih koordinat.
-Naelektreno kroglo in ozemljeno ploščo opišemo z Robnimi pogoji 1.:
-Na ozemljeni plošči je potencial enak 0, na krogli pa U0.
-Slinice se ozemljene plošče in nabite krogle dotikajo pravokotno. 
-Poenostavljen sistem naelektrene krogle s sosedami (Slika 2. in 3.) pa opišemo z Robnimi pogoji 2.:
-Na ozemljeni plošči je potencial enak 0, na krogli pa U0.
-Slinice se ozemljene plošče in nabite krogle dotikajo pravokotno. Na obodnem robu valjasto 
-omejenega prostora pa so vzporedne z mejno ploskvijo.
-Zaradi simetrije cilindrične koordinate theta, ki nam jo da poenostavljen problem (Slika 2.) ga lahko 
-rešujemo v 2D ravnini, ki jo oklepata cilindrična vektorja z in r.
+Kako se zaradi sosed polje med cevko in oddaljeno ploščato anodo oslabi? Vzemi poenostavljen primer, v katerem obravnavamo samo vrh polkroglasto zaključene cevke – torej kot majhno kroglo proti ravnini. Sosedne cevke predstavimo z mrežo krogel, tako da z zrcaljenjem nastane problem krogle v valjasto omejenem prostoru (z robnim pogojem II. vrste na mejnih ploskvah - Slika \ref{shema}).
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=5cm]{slike/rezultat1.jpg}
-\caption{Vključite lahko tudi sliko.}
+\includegraphics[width=13cm]{slike/shema.eps}
+\caption{Shema približka polja nanocevk}
+\label{shema}
 \end{center}
 \end{figure}
 
-\subsection{Prvi podrazdelek prvega razdelka}
+\section{Postopek}
 
-Tu napišete vsebino prvega podrazdelka prvega razdelka. \LaTeX je namenjen predvsem matematičnim besedilom. Vsaka matematična formula, tudi zgolj $x$, se pojavi med dvema \$ znakoma: \verb.$x$.. Seveda pa lahko napišemo tudi bolj zapletene izraze: $$\int_0^\infty \frac{1}{x^3}dx.$$
+\subsection{Opis fizikalnega problema}
+Nalogo zastavimo kot reševanje parcialne diferencialne enačbe z robnimi pogoji prvega (Dirichletov problem) in
+drugega reda (von Neumannov problem) ter jo lahko rešujemo numerično. Zaradi izbrane poenostavitve problema se 
+poslužimo cilindričnih koordinat. \newpage
+Naelektreno kroglo in ozemljeno ploščo (Slika \ref{layout-1}) opišemo z \textit{Robnimi pogoji 1.}:\newline
+
+$ \phi (z = D) = 0 $
+
+$ \phi (r^2 + z^2 = r_o^2) = U_0 $
+
+$ \frac{\partial \phi}{\partial \vec{n}} (r^2 + z^2 = r_0^2) = k $
+\newline
+
+Na ozemljeni plošči je potencial enak 0, a pričakujemo inducirano napetost. Kroglo postavimo na potencial $U_0$.
+Slinice se ozemljene plošče in nabite krogle dotikajo pravokotno.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=14cm]{slike/layout-1.eps}
+\caption{Krogla na potencialu $U_0$ in ozemljena plošča}
+\label{layout-1}
+\end{center}
+\end{figure}
+
+Poenostavljen sistem naelektrene krogle s sosedami (Slika \ref{layout-2}) pa opišemo z \textit{Robnimi pogoji 2.}:\newline
+
+$ \phi (z = D) = 0 $
+
+$ \phi (r^2 + z^2 = r_o^2) = U_0 $
+
+$ \frac{\partial \phi}{\partial \vec{n}} ( r^2 + z^2 = r_0^2) = k $
+
+$ \frac{\partial \phi}{\partial \vec{n}} (r = d) = 0 $
+\newline
+
+Na ozemljeni plošči je potencial enak 0, a pričakujemo inducirano napetost. Kroglo postavimo na potencial $U_0$.
+Slinice se ozemljene plošče in nabite krogle dotikajo pravokotno. Na obodu valjasto omejenega prostora pa so vzporedne z mejno ploskvijo.
+
+\newpage
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=14cm]{slike/layout-2.eps}
+\caption{Množica krogel na potencialu $U_0$ in ozemljena plošča}
+\label{layout-2}
+\end{center}
+\end{figure}
+
+Zaradi simetrije cilindrične koordinate $\theta$, problem lahko rešujemo v ravnini, ki jo oklepata cilindrična vektorja $\vec{z}$ in $\vec{r}$ (Slika \ref{layout-3}).
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=13cm]{slike/layout-3.eps}
+\caption{Končna poenostavitev problema}
+\label{layout-3}
+\end{center}
+\end{figure}
+
+\subsection{Numerično reševanje problema}
+
+Ker se je analitični pristop izkazal za netrivialnega, sem se problema lotil numerično.
+Izbral sem orodje \textit{assempde} (iz zbirke orodij Matlab), ki ob dani geometriji in robnih pogojih z metodo končnih elementov numerično izračuna rešitev parcialne diferencialne enačbe.
+Zaradi fizikalne smiselnosti sem v numeričen postopek dodal še dva robna pogoja:
+
+$ \phi (z \to \inf) = U_0 $ - cevke so pritrjene na nekakšno elektrodo, ki jo uporabimo za vzdrževanje potenciala
+
+$ \frac{\partial \phi}{\partial \vec{n}} (z \to \inf) = k $ - elektroda je prevodnik
+
+\section{Rezultati}
+
+Rezultat so grafi prereza električnega polja fizikalnega sistema pod različnimi koti (Slika: \ref{slika01-koti}) in slike jakosti električnega polja celotnega sistema. Pri izračunih sem variiral premer sfere proti premeru valja.
+
+\begin{center}
+\includegraphics[width=15cm]{slike/slika001.png}
+\includegraphics[width=15cm]{slike/presek001.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=15cm]{slike/slika01.png}
+\includegraphics[width=15cm]{slike/presek01.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=15cm]{slike/slika05.png}
+\includegraphics[width=15cm]{slike/presek05.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=15cm]{slike/slika09.png}
+\includegraphics[width=15cm]{slike/presek09.png}
+\end{center}
+
+\newpage
+\begin{figure}
+\begin{center}
+\includegraphics[width=15cm]{slike/slika01-koti.png}
+\caption{Primer slike polja, z oznakami prikazanih prerezov}
+\label{slika01-koti}
+\end{center}
+\end{figure}
 
 
-\begin{izrek}
-\label{iz:prviIzrek}
-Tu napišete besedilo izreka.
-\end{izrek}
-\begin{dokaz}
-Tu napišete besedilo dokaza. Lahko je dolgo več vrstic, ali pa sem in tja preide tudi v nov odstavek.
+\section{Zaključek}
 
-Nov odstavek se začne po prazni vrstici.
-\end{dokaz}
+Ko je konica nanocevke velika napram razdalji do svojih sosed, je polje precej manj homogeno kot če je konica majhna napram razdalji do svojih sosed.
+Iz grafov prereza polja lahko vidimo tudi, da prerez polja ob elektrodi ohranja obliko, a se njegov gradient s povečevanjem sfere veča.
 
-
-Sledi še primer naštevanja z možnim sklicevanjem, npr. na Izrek \ref{iz:prviIzrek}: 
-\begin{enumerate}[label=(\roman{*}), ref=(\roman{*})]
-\item \label{it:prva} Prva alineja je pred alinejo \ref{it:druga}.
-\item \label{it:druga} Druga alineja sledi alineji \ref{it:prva}.
-\end{enumerate}
 
 \begin{thebibliography}{99}
 
+\bibitem{kodre} I. Kuščer in A. Kodre: Matematika v fiziki in tehniki, DMFA, Ljubljana, 1994
+\bibitem{matlabDoc} Dokumentacija programa Matlab - http://www.mathworks.com/help/techdoc/
 
-
-\bibitem{oznakaKnjige} I. Priimek, Naslov knjige, Zalo?nik, MestoIzdaje, Letnica.
-
-\bibitem{oznakaClanka} I. Priimek, Naslov ?lanka, Naslov revije Letnik (Leto) str.\ Od--Do.
+%  I. Priimek, Naslov knjige, Zalo?nik, MestoIzdaje, Letnica.
+% \bibitem{oznakaClanka} I. Priimek, Naslov ?lanka, Naslov revije Letnik (Leto) str.\ Od--Do.
 \end{thebibliography}
+
+
+% \subsection{Prvi podrazdelek prvega razdelka}
+
+% Tu napišete vsebino prvega podrazdelka prvega razdelka. \LaTeX je namenjen predvsem matematičnim besedilom. Vsaka matematična formula, tudi zgolj $x$, se pojavi med dvema \$ znakoma: \verb.$x$.. Seveda pa lahko napišemo tudi bolj zapletene izraze: $$\int_0^\infty \frac{1}{x^3}dx.$$
+
+
+% \begin{izrek}
+% \label{iz:prviIzrek}
+% Tu napišete besedilo izreka.
+% \end{izrek}
+% \begin{dokaz}
+% Tu napišete besedilo dokaza. Lahko je dolgo več vrstic, ali pa sem in tja % preide tudi v nov odstavek.
+
+%Nov odstavek se začne po prazni vrstici.
+%\end{dokaz}
+
+
+% Sledi še primer naštevanja z možnim sklicevanjem, npr. na Izrek \ref{iz:prviIzrek}: 
+% \begin{enumerate}[label=(\roman{*}), ref=(\roman{*})]
+% \item \label{it:prva} Prva alineja je pred alinejo \ref{it:druga}.
+% \item \label{it:druga} Druga alineja sledi alineji \ref{it:prva}.
+% \end{enumerate}
 
 
 \end{document}
